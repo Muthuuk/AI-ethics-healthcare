@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Ethics Assessment Checklist</title>
+    <style>
+        body {
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+            background: #f1f3f4;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .form-header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: 400;
+        }
+        
+        .form-header p {
+            margin: 15px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .form-content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 30px;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .section-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #4285f4;
+            margin: 0 -30px 25px -30px;
+        }
+        
+        .section-title {
+            color: #1a73e8;
+            font-size: 1.4em;
+            font-weight: 500;
+            margin: 0 0 10px 0;
+        }
+        
+        .section-description {
+            color: #5f6368;
+            margin: 0;
+        }
+        
+        .question-group {
+            margin-bottom: 25px;
+        }
+        
+        .question {
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .checkbox-item:hover, .radio-item:hover {
+            background: #f8f9fa;
+            border-color: #4285f4;
+        }
+        
+        .checkbox-item input, .radio-item input {
+            margin-right: 15px;
+            transform: scale(1.2);
+            accent-color: #4285f4;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: #4285f4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+        
+        .textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .required {
+            color: #d93025;
+        }
+        
+        .score-display {
+            background: linear-gradient(135deg, #34a853, #137333);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.2em;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 30px 0;
+            background: #f8f9fa;
+            margin: 30px -30px 0 -30px;
+        }
+        
+        .submit-btn {
+            background: #4285f4;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 24px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+        }
+        
+        .submit-btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.4);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4285f4, #34a853);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 20px;
+            }
+            
+            .section-header {
+                margin: 0 -20px 25px -20px;
+            }
+            
+            .submit-section {
+                margin: 30px -20px 0 -20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Healthcare Ethics Assessment Checklist</h1>
+            <p>Comprehensive evaluation tool for ethical decision-making in healthcare settings</p>
+        </div>
+        
+        <div class="form-content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            
+            <form id="ethicsForm">
+                <!-- Section 1: Autonomy & Informed Consent -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🤝 Autonomy & Informed Consent</h2>
+                        <p class="section-description">Assessing respect for patient self-determination and decision-making capacity</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Has the patient been provided with clear, understandable information about their condition? <span class="required">*</span></div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="informed_consent_1" value="yes" required>
+                                Yes, comprehensive information provided
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="informed_consent_1" value="partial" required>
+                                Partial information provided
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="informed_consent_1" value="no" required>
+                                No, information not adequately provided
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Which elements of informed consent have been addressed? (Select all that apply)</div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="consent_elements" value="diagnosis">
+                                Diagnosis and prognosis explained
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="consent_elements" value="treatment_options">
+                                Treatment options discussed
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="consent_elements" value="risks_benefits">
+                                Risks and benefits outlined
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="consent_elements" value="alternatives">
+                                Alternative treatments considered
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="consent_elements" value="right_to_refuse">
+                                Right to refuse treatment discussed
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Patient's decision-making capacity assessment:</div>
+                        <textarea class="text-input textarea" name="capacity_assessment" placeholder="Describe the patient's ability to understand information, appreciate consequences, reason through options, and communicate a choice..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Section 2: Beneficence & Non-Maleficence -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">💚 Beneficence & Non-Maleficence</h2>
+                        <p class="section-description">Evaluating benefit maximization and harm prevention</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Have potential benefits of the proposed intervention been clearly identified? <span class="required">*</span></div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="benefits_identified" value="yes" required>
+                                Yes, clearly identified and documented
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="benefits_identified" value="partial" required>
+                                Partially identified
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="benefits_identified" value="no" required>
+                                No, benefits not clearly identified
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Risk assessment and mitigation strategies: (Select all that apply)</div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="risk_management" value="identified">
+                                All potential risks identified
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="risk_management" value="quantified">
+                                Risks quantified and communicated
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="risk_management" value="mitigation">
+                                Mitigation strategies in place
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="risk_management" value="monitoring">
+                                Ongoing monitoring plan established
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Rate the overall benefit-to-risk ratio:</div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="benefit_risk_ratio" value="high_benefit">
+                                High benefit, low risk
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="benefit_risk_ratio" value="moderate_benefit">
+                                Moderate benefit, acceptable risk
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="benefit_risk_ratio" value="uncertain">
+                                Uncertain benefit-risk balance
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="benefit_risk_ratio" value="high_risk">
+                                Low benefit, high risk concerns
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 3: Justice & Fairness -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">⚖️ Justice & Fairness</h2>
+                        <p class="section-description">Assessing fair treatment and resource allocation</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Are healthcare resources being distributed fairly? <span class="required">*</span></div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="resource_distribution" value="fair" required>
+                                Yes, distribution is fair and equitable
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="resource_distribution" value="concerning" required>
+                                Some concerns about fairness
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="resource_distribution" value="unfair" required>
+                                No, distribution appears unfair
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Factors considered in resource allocation: (Select all that apply)</div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="allocation_factors" value="medical_need">
+                                Medical need and urgency
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="allocation_factors" value="likelihood_benefit">
+                                Likelihood of benefit
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="allocation_factors" value="equal_access">
+                                Equal access regardless of background
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="allocation_factors" value="vulnerable_populations">
+                                Special consideration for vulnerable populations
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 4: Cultural Competence & Diversity -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🌍 Cultural Competence & Diversity</h2>
+                        <p class="section-description">Evaluating cultural sensitivity and inclusive care</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Have cultural, religious, and personal values been considered?</div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="cultural_consideration" value="fully">
+                                Fully considered and integrated
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="cultural_consideration" value="partially">
+                                Partially considered
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="cultural_consideration" value="not_considered">
+                                Not adequately considered
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Language and communication accommodations:</div>
+                        <textarea class="text-input textarea" name="communication_accommodations" placeholder="Describe any language interpreters, cultural mediators, or communication aids used..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Section 5: Professional Integrity -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🎯 Professional Integrity</h2>
+                        <p class="section-description">Assessing professional standards and ethical conduct</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Potential conflicts of interest: (Select all that apply)</div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="conflicts" value="none">
+                                No conflicts of interest identified
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="conflicts" value="financial">
+                                Financial interests disclosed
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="conflicts" value="professional">
+                                Professional relationships considered
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="conflicts" value="personal">
+                                Personal relationships addressed
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Professional boundaries and competence:</div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="professional_boundaries" value="maintained">
+                                Appropriate boundaries maintained
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="professional_boundaries" value="concerning">
+                                Some boundary concerns
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="professional_boundaries" value="violated">
+                                Boundary violations identified
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 6: Privacy & Confidentiality -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🔒 Privacy & Confidentiality</h2>
+                        <p class="section-description">Evaluating protection of patient information and privacy rights</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Patient confidentiality measures: (Select all that apply)</div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="confidentiality" value="hipaa_compliant">
+                                HIPAA compliance maintained
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="confidentiality" value="secure_records">
+                                Secure record keeping systems
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="confidentiality" value="limited_disclosure">
+                                Information disclosure limited to need-to-know
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="confidentiality" value="patient_consent">
+                                Patient consent obtained for information sharing
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Are there any mandatory reporting obligations?</div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="mandatory_reporting" value="none">
+                                No mandatory reporting required
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="mandatory_reporting" value="identified">
+                                Reporting obligations identified and addressed
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="mandatory_reporting" value="conflict">
+                                Conflict between confidentiality and reporting
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 7: End-of-Life Considerations -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🕊️ End-of-Life & Palliative Care</h2>
+                        <p class="section-description">Assessing ethical considerations in end-of-life care decisions</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Is this case relevant to end-of-life care decisions?</div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="end_of_life_relevant" value="yes" onchange="toggleEndOfLifeSection(true)">
+                                Yes, end-of-life considerations apply
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="end_of_life_relevant" value="no" onchange="toggleEndOfLifeSection(false)">
+                                No, not applicable to this case
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="endOfLifeDetails" style="display: none;">
+                        <div class="question-group">
+                            <div class="question">End-of-life planning elements: (Select all that apply)</div>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="eol_planning" value="advance_directives">
+                                    Advance directives reviewed
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="eol_planning" value="surrogate_decision">
+                                    Surrogate decision-maker identified
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="eol_planning" value="comfort_care">
+                                    Comfort care options discussed
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="eol_planning" value="family_involvement">
+                                    Family appropriately involved
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 8: Research & Innovation Ethics -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🔬 Research & Innovation Ethics</h2>
+                        <p class="section-description">Evaluating ethical considerations in research and innovative treatments</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Does this case involve research or experimental treatments?</div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="research_involved" value="yes" onchange="toggleResearchSection(true)">
+                                Yes, research or experimental elements present
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="research_involved" value="no" onchange="toggleResearchSection(false)">
+                                No, standard care only
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="researchDetails" style="display: none;">
+                        <div class="question-group">
+                            <div class="question">Research ethics compliance: (Select all that apply)</div>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="research_ethics" value="irb_approval">
+                                    IRB/Ethics committee approval obtained
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="research_ethics" value="informed_consent">
+                                    Research-specific informed consent
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="research_ethics" value="risk_benefit">
+                                    Favorable risk-benefit ratio
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="research_ethics" value="vulnerable_protection">
+                                    Special protections for vulnerable subjects
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 9: Overall Assessment -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">📊 Overall Ethical Assessment</h2>
+                        <p class="section-description">Summary evaluation and action planning</p>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Overall ethical risk level of this case:</div>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="risk_level" value="low">
+                                Low risk - Standard ethical practices apply
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="risk_level" value="moderate">
+                                Moderate risk - Additional consultation recommended
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="risk_level" value="high">
+                                High risk - Ethics committee review required
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="risk_level" value="crisis">
+                                Crisis level - Immediate ethics consultation needed
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Recommended next steps: (Select all that apply)</div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="next_steps" value="proceed">
+                                Proceed with current plan
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="next_steps" value="consultation">
+                                Seek ethics consultation
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="next_steps" value="committee_review">
+                                Submit to ethics committee
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="next_steps" value="additional_info">
+                                Gather additional information
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="next_steps" value="family_meeting">
+                                Schedule family meeting
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="next_steps" value="policy_review">
+                                Review institutional policies
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Additional comments and considerations:</div>
+                        <textarea class="text-input textarea" name="additional_comments" placeholder="Please provide any additional ethical considerations, concerns, or contextual factors that should be documented..."></textarea>
+                    </div>
+                    
+                    <div class="question-group">
+                        <div class="question">Case reviewer information:</div>
+                        <input type="text" class="text-input" name="reviewer_name" placeholder="Name and Title" required>
+                        <br><br>
+                        <input type="email" class="text-input" name="reviewer_email" placeholder="Email Address" required>
+                        <br><br>
+                        <input type="date" class="text-input" name="review_date" required>
+                    </div>
+                </div>
+                
+                <div class="score-display" id="scoreDisplay" style="display: none;">
+                    <h3>Ethics Assessment Score: <span id="scoreValue">--</span>/100</h3>
+                    <p id="scoreInterpretation">Complete the assessment to see your score</p>
+                </div>
+                
+                <div class="submit-section">
+                    <button type="button" class="submit-btn" onclick="calculateScore()">Calculate Ethics Score</button>
+                    <br><br>
+                    <button type="submit" class="submit-btn" style="background: #34a853;">Submit Assessment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function toggleEndOfLifeSection(show) {
+            const section = document.getElementById('endOfLifeDetails');
+            section.style.display = show ? 'block' : 'none';
+        }
+        
+        function toggleResearchSection(show) {
+            const section = document.getElementById('researchDetails');
+            section.style.display = show ? 'block' : 'none';
+        }
+        
+        function updateProgress() {
+            const form = document.getElementById('ethicsForm');
+            const requiredFields = form.querySelectorAll('input[required]');
+            const completedFields = Array.from(requiredFields).filter(field => {
+                if (field.type === 'radio') {
+                    return form.querySelector(`input[name="${field.name}"]:checked`);
+                }
+                return field.value.trim() !== '';
+            });
+            
+            const progress = (completedFields.length / requiredFields.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function calculateScore() {
+            let score = 0;
+            let maxScore = 0;
+            
+            // Scoring logic for different sections
+            const scoringCriteria = {
+                'informed_consent_1': { 'yes': 20, 'partial': 10, 'no': 0 },
+                'benefits_identified': { 'yes': 15, 'partial': 8, 'no': 0 },
+                'resource_distribution': { 'fair': 15, 'concerning': 8, 'unfair': 0 },
+                'cultural_consideration': { 'fully': 15, 'partially': 8, 'not_considered': 0 },
+                'professional_boundaries': { 'maintained': 10, 'concerning': 5, 'violated': 0 },
+                'risk_level': { 'low': 15, 'moderate': 10, 'high': 5, 'crisis': 0 }
+            };
+            
+            // Calculate base score from key questions
+            Object.keys(scoringCriteria).forEach(name => {
+                const element = document.querySelector(`input[name="${name}"]:checked`);
+                if (element) {
+                    score += scoringCriteria[name][element.value] || 0;
+                }
+                maxScore += Math.max(...Object.values(scoringCriteria[name]));
+            });
+            
+            // Bonus points for comprehensive answers
+            const checkboxGroups = ['consent_elements', 'risk_management', 'allocation_factors', 'confidentiality'];
+            checkboxGroups.forEach(name => {
+                const checked = document.querySelectorAll(`input[name="${name}"]:checked`).length;
+                score += Math.min(checked * 2, 10);
+                maxScore += 10;
+            });
+            
+            const finalScore = Math.round((score / maxScore) * 100);
+            
+            document.getElementById('scoreValue').textContent = finalScore;
+            document.getElementById('scoreDisplay').style.display = 'block';
+            
+            let interpretation = '';
+            if (finalScore >= 90) {
+                interpretation = 'Excellent: Comprehensive ethical framework applied';
+            } else if (finalScore >= 75) {
+                interpretation = 'Good: Strong ethical practices with minor areas for improvement';
+            } else if (finalScore >= 60) {
+                interpretation = 'Moderate: Some ethical concerns identified, review recommended';
+            } else {
+                interpretation = 'Concerning: Significant ethical issues require immediate attention';
+            }
+            
+            document.getElementById('scoreInterpretation').textContent = interpretation;
+        }
+        
+        // Add event listeners for progress tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('change', updateProgress);
+                input.addEventListener('input', updateProgress);
+            });
+            
+            updateProgress(); // Initial progress check
+        });
+        
+        // Form submission handler
+        document.getElementById('ethicsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Ethics assessment completed! In a real implementation, this would be submitted to your healthcare ethics database.');
+        });
+    </script>
+</body>
+</html>
